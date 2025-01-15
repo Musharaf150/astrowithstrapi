@@ -1,0 +1,36 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import Layout from '../../../layouts/Layout.astro';
+import fetchApi from '../../../lib/strapi';
+
+export async function getStaticPaths({paginate}) {
+    const response = await fetchApi({
+        endpoint: 'blogs',
+        wrappedByKey: 'data',
+       locale: 'ar'
+    });
+    const articles = response;
+    return paginate(articles, {pageSize: 1})
+}
+const {page} = Astro.props;
+---
+
+<Layout>
+    <h1>صفحة: {page.currentPage}</h1>
+    <ul id="ul">
+        {page.data.map((article)=>(
+            <div>
+                <a href={`/blog${getRelativeLocaleUrl('ar')}${article.slug}`}>
+                <h1>{article.title}</h1>
+                </a>
+                <p>{article.content}</p>
+            </div>
+        ))}
+    </ul>
+    <div>
+
+        {page.url.prev ? <a href={page.url.prev}>الصفحة السابقة</a>: null} 
+        
+        {page.url.next ? <a href={page.url.next}>الصفحة التالية</a>: null}
+    </div>
+</Layout>
