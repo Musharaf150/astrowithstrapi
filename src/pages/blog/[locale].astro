@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+import fetchApi from "../../lib/strapi";
+import Layout from "../../layouts/Layout.astro";
+
+const locale = Astro.url.pathname.includes('/blog/ar') ? 'ar' : 'en';
+
+export async function getStaticPaths() {
+    const articles = await fetchApi({
+        endpoint: 'blogs',
+        wrappedByKey: 'data',
+        locale: "ar"
+    });
+    return articles.map((article)=>({
+        params: {
+            locale: 'ar'
+        },
+        props: article
+    }))
+}
+const article = Astro.props;
+
+console.log(`Fetched data for locale: ${article.slug}`);
+---
+
+<Layout>
+  
+</Layout>
+<!-- <script>
+    // Select buttons for each locale
+    const arButton = document.querySelector("#arButton");
+    const enButton = document.querySelector("#enButton");
+
+    arButton?.addEventLis<tener("click", () => {
+        // Update the URL to point to the Arabic locale
+        window.history.pushState({ locale: "ar" }, "العربية", "/blog/ar");
+        
+        // Fetch data for Arabic locale by updating the content
+        window.location.reload(); // Reload to apply the Arabic locale
+    });
+
+    enButton?.addEventListener("click", () => {
+        // Update the URL to point to the English locale
+        window.history.pushState({ locale: "en" }, "English", "/en");
+        
+        // Fetch data for English locale by updating the content
+        window.location.reload(); // Reload to apply the English locale
+    });
+</script> -->
