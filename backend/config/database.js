@@ -24,7 +24,7 @@ module.exports = ({ env }) => {
     },
     postgres: {
       connection: {
-        connectionString: env('DATABASE_URL'),
+        connectionString: env('postgresql://blog_owner:7S6YuAzhVZHQ@ep-rapid-tree-a1f6jmgq.ap-southeast-1.aws.neon.tech/blog?sslmode=require'),
         host: env('DATABASE_HOST', 'localhost'),
         port: env.int('DATABASE_PORT', 5432),
         database: env('DATABASE_NAME', 'strapi'),
@@ -48,6 +48,17 @@ module.exports = ({ env }) => {
       },
       useNullAsDefault: true,
     },
+    // mongo: {
+    //   connection: {
+    //     uri: env('DATABASE_URI', 'mongodb+srv://username:password@cluster0.mongodb.net/strapi'),
+    //     options: {
+    //       ssl: true,
+    //       useUnifiedTopology: true,
+    //       useNewUrlParser: true,
+    //     },
+    //     debug: env.bool('DATABASE_DEBUG', false),
+    //   },
+    // },
   };
 
   return {
