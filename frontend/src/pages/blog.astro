@@ -3,24 +3,15 @@ import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import fetchApi from "../lib/strapi";
 
-const locale = Astro.url.pathname.includes('/blog/ar') ? 'ar' : 'en';
 
 const data = await fetchApi({
     endpoint: "blogs",
     wrappedByKey: "data",
-    locale: locale
 });
 
-console.log(`Fetched data for locale: ${locale}`);
 ---
 
 <Layout>
-    <div id="localeButtons">
-        <!-- Button to switch to Arabic -->
-        <button id="arButton">العربية</button>
-        <!-- Button to switch to English -->
-        <button id="enButton">English</button>
-    </div>
     <div id="homeDiv">
         {
             data.map((item: any, index) => (
@@ -39,24 +30,4 @@ console.log(`Fetched data for locale: ${locale}`);
         }
     </div>
 </Layout>
-<script>
-    // Select buttons for each locale
-    const arButton = document.querySelector("#arButton");
-    const enButton = document.querySelector("#enButton");
 
-    arButton?.addEventListener("click", () => {
-        // Update the URL to point to the Arabic locale
-        window.history.pushState({ locale: "ar" }, "العربية", "/blog/ar");
-        
-        // Fetch data for Arabic locale by updating the content
-        window.location.reload(); // Reload to apply the Arabic locale
-    });
-
-    enButton?.addEventListener("click", () => {
-        // Update the URL to point to the English locale
-        window.history.pushState({ locale: "en" }, "English", "/blog/en");
-        
-        // Fetch data for English locale by updating the content
-        window.location.reload(); // Reload to apply the English locale
-    });
-</script>
