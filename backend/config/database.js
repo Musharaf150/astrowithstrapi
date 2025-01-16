@@ -24,7 +24,7 @@ module.exports = ({ env }) => {
     },
     postgres: {
       connection: {
-        connectionString: env('postgresql://blog_owner:7S6YuAzhVZHQ@ep-rapid-tree-a1f6jmgq.ap-southeast-1.aws.neon.tech/blog?sslmode=require'),
+        connectionString: env('DATABASE_URI'),
         host: env('DATABASE_HOST', 'localhost'),
         port: env.int('DATABASE_PORT', 5432),
         database: env('DATABASE_NAME', 'strapi'),

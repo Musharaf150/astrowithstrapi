@@ -2,6 +2,7 @@
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import Layout from '../../../layouts/Layout.astro';
 import fetchApi from '../../../lib/strapi';
+import Marked from '../../../components/Marked.astro';
 
 export async function getStaticPaths({paginate}) {
     const response = await fetchApi({
@@ -10,7 +11,7 @@ export async function getStaticPaths({paginate}) {
        locale: 'ar'
     });
     const articles = response;
-    return paginate(articles, {pageSize: 1})
+    return paginate(articles, {pageSize: 2})
 }
 const {page} = Astro.props;
 ---
@@ -19,15 +20,15 @@ const {page} = Astro.props;
     <h1>صفحة: {page.currentPage}</h1>
     <ul id="ul">
         {page.data.map((article)=>(
-            <div>
+            <div class="card">
                 <a href={`/blog${getRelativeLocaleUrl('ar')}${article.slug}`}>
                 <h1>{article.title}</h1>
                 </a>
-                <p>{article.content}</p>
+                <Marked content={article.content}/>
             </div>
         ))}
     </ul>
-    <div>
+    <div class="pagination">
 
         {page.url.prev ? <a href={page.url.prev}>الصفحة السابقة</a>: null} 
         

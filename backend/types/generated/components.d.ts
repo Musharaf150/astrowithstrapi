@@ -3,6 +3,7 @@ import type { Schema, Struct } from '@strapi/strapi';
 export interface AboutAbout extends Struct.ComponentSchema {
   collectionName: 'components_about_abouts';
   info: {
+    description: '';
     displayName: 'About';
   };
   attributes: {
@@ -10,7 +11,7 @@ export interface AboutAbout extends Struct.ComponentSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
-    aboutText: Schema.Attribute.String;
+    aboutText: Schema.Attribute.Text;
   };
 }
 

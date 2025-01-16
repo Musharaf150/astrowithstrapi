@@ -20,7 +20,10 @@ const {url} = aboutPhoto[0];
 ---
 
 <Layout>
-<Hero {heroText} {heroDescription}/>
-<div id="separator"/>
-<About {aboutText} aboutPhotoUrl={url}/>
+    <section id="homePage">
+        <Hero {heroText} {heroDescription}/>
+        <div id="separator"/>
+        <About {aboutText} aboutPhotoUrl={url}/>
+
+    </section>
 </Layout>

@@ -1,22 +1,24 @@
 {
   "collectionName": "components_about_abouts",
   "info": {
-    "displayName": "About"
+    "displayName": "About",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "aboutText": {
-      "type": "string"
+      "type": "text"
     },
     "aboutPhoto": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     }
   }
 }
